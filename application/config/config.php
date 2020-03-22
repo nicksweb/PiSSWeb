@@ -23,7 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = ''; // SEE ENVIROMENT CONFIG FILES
+//$config['base_url'] = 'https://pissweb.autechnet.local'; // SEE ENVIROMENT CONFIG FILES
+$Config['base_url'] = 'https://172.16.0.22'; // SEE ENVIROMENT CONFIG FILES
+
 
 /*
 |--------------------------------------------------------------------------
@@ -188,7 +190,7 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-\=';
 |
 */
 $config['allow_get_array'] = TRUE;
-$config['enable_query_strings'] = FALSE;
+$config['enable_query_strings'] = False;
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 $config['directory_trigger'] = 'd';

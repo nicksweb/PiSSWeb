@@ -10,6 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=<?php echo $this->settings->site_version; ?>">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico?v=<?php echo $this->settings->site_version; ?>">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
     <title><?php echo $page_title; ?> - <?php echo $this->settings->site_name; ?></title>
 
     <?php // CSS files ?>
@@ -46,6 +52,14 @@
                 <?php // Nav bar left ?>
                 <ul class="nav navbar-nav">
                     <li class="<?php echo (uri_string() == 'admin' OR uri_string() == 'admin/dashboard') ? 'active' : ''; ?>"><a href="<?php echo base_url('/admin'); ?>"><?php echo lang('admin button dashboard'); ?></a></li>
+                    <li class="dropdown<?php echo (strstr(uri_string(), 'admin/security')) ? ' active' : ''; ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('admin button security'); ?> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="<?php echo (uri_string() == 'admin/security') ? 'active' : ''; ?>"><a href="<?php echo base_url('/admin/security'); ?>"><?php echo lang('admin button security_zone_log'); ?></a></li>
+                            <li class="<?php echo (uri_string() == 'admin/security/armingLog') ? 'active' : ''; ?>"><a href="<?php echo base_url('/admin/security/armingLog'); ?>"><?php echo lang('admin button security_arming_log'); ?></a></li>
+                            <li class="<?php echo (uri_string() == 'admin/security/settings') ? 'active' : ''; ?>"><a href="<?php echo base_url('/admin/security/settings'); ?>"><?php echo lang('admin button security_settings'); ?></a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown<?php echo (strstr(uri_string(), 'admin/users')) ? ' active' : ''; ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('admin button users'); ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">

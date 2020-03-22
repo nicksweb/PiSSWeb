@@ -9,6 +9,7 @@ class MY_Controller extends CI_Controller {
      * Common data
      */
     public $user;
+    public $zone;
     public $settings;
     public $languages;
     public $includes;

@@ -16,6 +16,10 @@ $lang['admin button settings']            = "Settings";
 $lang['admin button users']               = "Users";
 $lang['admin button users_add']           = "Add New User";
 $lang['admin button users_list']          = "List Users";
+$lang['admin button security']          = "Security";
+$lang['admin button security_zone_log']               = "Zone Log";
+$lang['admin button security_arming_log']               = "Arming Log";
+$lang['admin button security_settings']           = "Settings";
 
 // Tooltips
 $lang['admin tooltip csv_export']         = "Export a CSV file of all results with filters applied.";

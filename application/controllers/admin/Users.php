@@ -60,19 +60,19 @@ class Users extends Admin_Controller {
         // get filters
         $filters = array();
 
-        if ($this->input->get('username'))
+        if ($this->input->get('zone'))
         {
-            $filters['username'] = $this->input->get('username', TRUE);
+            $filters['zone'] = $this->input->get('zone', TRUE);
         }
 
         if ($this->input->get('first_name'))
         {
-            $filters['first_name'] = $this->input->get('first_name', TRUE);
+            $filters['status'] = $this->input->get('status', TRUE);
         }
 
-        if ($this->input->get('last_name'))
+        if ($this->input->get('id'))
         {
-            $filters['last_name'] = $this->input->get('last_name', TRUE);
+            $filters['id'] = $this->input->get('id', TRUE);
         }
 
         // build filter string
@@ -98,19 +98,19 @@ class Users extends Admin_Controller {
                 // apply the filter(s)
                 $filter = "";
 
-                if ($this->input->post('username'))
+                if ($this->input->post('zone'))
                 {
-                    $filter .= "&username=" . $this->input->post('username', TRUE);
+                    $filter .= "&zone=" . $this->input->post('zone', TRUE);
                 }
 
-                if ($this->input->post('first_name'))
+                if ($this->input->post('id'))
                 {
-                    $filter .= "&first_name=" . $this->input->post('first_name', TRUE);
+                    $filter .= "&id=" . $this->input->post('id', TRUE);
                 }
 
-                if ($this->input->post('last_name'))
+                if ($this->input->post('status'))
                 {
-                    $filter .= "&last_name=" . $this->input->post('last_name', TRUE);
+                    $filter .= "&status=" . $this->input->post('lasstatust_name', TRUE);
                 }
 
                 // redirect using new filter(s)

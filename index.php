@@ -61,7 +61,7 @@ if (strpos($domain, '.dev') !== false || strpos($domain, '.local') !== false || 
 }
 else
 {
-   define('ENVIRONMENT', 'production');
+   define('ENVIRONMENT', 'development'); // Was production
 }
 
 

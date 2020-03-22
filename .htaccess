@@ -1,7 +1,20 @@
-RewriteEngine on
-    # RewriteCond %{HTTPS} !=on
-    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#<IfModule mod_rewrite.c>
+     RewriteEngine on
+    #RewriteCond %{HTTPS} !=on
+    #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]    
+    #RewriteBase /PiSSWeb/
     RewriteCond $1 !^(index\.php|assets|img|css|js|robots\.txt|favicon\.ico)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ ./index.php?/$1 [L,QSA]
+
+#</IfModule>
+#RewriteEngine On
+#RewriteBase /PiSSWeb
+#RewriteCond %{REQUEST_URI} !^/PiSSWeb/
+#RewriteRule ^(.*)$ PiSSWeb/$1/
+
+#$RewriteEngine On
+#	RewriteCond $3 !^(index\.php|assets|img|css|js|robots\.txt|favicon\.ico)
+#	RewriteRule ^([^/]*)/([^/]*)$ /PiSSWeb/index.php/$3 [L]
+
