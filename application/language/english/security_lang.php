@@ -17,6 +17,11 @@ $lang['security title security_list_summary']                = "Security List - 
 $lang['security title arming_list']                = "Armed Zones | History";
 $lang['security title arming_list_summary']                = "Arming Log - This page details when a zone has been armed / disarmed.";
 
+$lang['security title settings']                = "Security Settings";
+
+$lang['security title settings_summary']                = "Configure all Security related system settings for PiSS";
+
+
 // Buttons
 $lang['security button add_new_user']            = "Add New User";
 $lang['security button register']                = "Create Account";

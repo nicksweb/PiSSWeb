@@ -20,6 +20,7 @@ class Security_model extends CI_Model {
         $this->_db2 = 'piSS_Zones';
         $this->_db3 = 'piSS_SensorLog';
         $this->_db4 = 'piSS_Zones';
+        $this->_db5 = 'piSS_Settings';
 
     }
 
@@ -144,6 +145,7 @@ class Security_model extends CI_Model {
      */
     function get_all($limit=0, $offset=0, $filters=array(), $sort='Zone', $dir='ASC')
     {
+
         $sql = "
             SELECT SQL_CALC_FOUND_ROWS *
             FROM {$this->_db2}
@@ -614,6 +616,97 @@ class Security_model extends CI_Model {
                 {
                     return TRUE;
                 }
+            }
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Retrieve all settings
+     *
+     * @return array|null
+     */
+    function get_settings()
+    {
+
+        $results = NULL;
+
+        $sql = "
+            SELECT *
+            FROM {$this->_db5}
+            ORDER BY category,sort_order
+        ";
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0)
+        {
+            $results = $query->result_array();
+        }
+
+        return $results;
+    }
+
+    function get_settings_categories() 
+    {
+        $sql = "Select DISTINCT category from {$this->_db5}";
+        $query = $this->db->query($sql);
+        $results = $query->result_array();
+
+        $results2=array();
+
+        foreach ($results as $value) {
+            $results2= $value;
+        }
+
+        //if ($query->num_rows() > 0) {
+        //    $results = $query->result_array();            
+        //}
+
+        //else
+        //{
+         //   $results = NULL;
+        //}
+
+        return $results2;
+    }
+
+
+    /**
+     * Save changes to the settings
+     *
+     * @param  array $data
+     * @param  int $user_id
+     * @return boolean
+     */
+    function save_settings($data=array(), $user_id=NULL)
+    {
+        if ($data && $user_id)
+        {
+            $saved = FALSE;
+
+            foreach ($data as $key => $value)
+            {
+                $sql = "
+                    UPDATE {$this->_db5}
+                    SET Value = " . ((is_array($value)) ? $this->db->escape(serialize($value)) : $this->db->escape($value)) . ",
+                        last_update = '" . date('Y-m-d H:i:s') . "',
+                        updated_by = " . $this->db->escape($user_id) . "
+                    WHERE SettingKey = " . $this->db->escape($key) . "
+                ";
+
+                $this->db->query($sql);
+
+                if ($this->db->affected_rows() > 0)
+                {
+                    $saved = TRUE;
+                }
+            }
+
+            if ($saved)
+            {
+                return TRUE;
             }
         }
 
