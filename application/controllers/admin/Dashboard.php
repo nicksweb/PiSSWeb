@@ -11,6 +11,12 @@ class Dashboard extends Admin_Controller {
 
         // load the language files
         $this->lang->load('dashboard');
+
+         // load the language files
+         $this->lang->load('security');
+
+         // load the users model
+         $this->load->model('security_model');
     }
 
 
@@ -26,9 +32,23 @@ class Dashboard extends Admin_Controller {
 
         $data = $this->includes;
 
+        $piss = $this->security_model->get_zone_status();
+
         // load views
         $data['content'] = $this->load->view('admin/dashboard', NULL, TRUE);
+        $data['zones'] = $piss['results'];
+
+        // set content data
+        $content_data = array(
+            'content'   => $this->load->view('admin/dashboard', NULL, TRUE),
+            'zones'      => $piss['results'],
+            'apikey' => $this->settings->apitoken
+       );
+
+        // load views
+        $data['content'] = $this->load->view('admin/dashboard', $content_data, TRUE);
         $this->load->view($this->template, $data);
+
     }
 
 }

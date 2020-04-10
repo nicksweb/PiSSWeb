@@ -105,6 +105,7 @@ class Security_model extends CI_Model {
             }
         }
 
+        
         $sql .= " ORDER BY {$sort} {$dir}";
 
         if ($limit)
@@ -126,6 +127,36 @@ class Security_model extends CI_Model {
         $sql = "SELECT FOUND_ROWS() AS total";
         $query = $this->db->query($sql);
         $results['total'] = $query->row()->total;
+
+        return $results;
+    }
+
+    function get_zone_status()
+    {
+        /*$sql = "
+            SELECT SQL_CALC_FOUND_ROWS * on 
+            FROM {$this->_db3} db3 left join {$this->_db2} db2 on db3.ID=db2.Zone
+            WHERE ID > 0
+        "; */ 
+
+        $sql = "
+        SELECT *   
+            From piSS_Zones
+            Where Zone < 99
+        ";
+
+        
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0)
+        {
+            $results['results'] = $query->result_array();
+        }
+        
+        else
+        {
+            $results['results'] = NULL;
+        }
 
         return $results;
     }
@@ -708,6 +739,38 @@ class Security_model extends CI_Model {
             {
                 return TRUE;
             }
+        }
+
+        return FALSE;
+    }
+
+    // Sets the Zone from the API module. 
+    function setZone($zone, $mode)
+    {
+        $saved = FALSE;
+
+        if ($mode == "true") {
+            $status = 1;
+        }
+        if ($mode == "false") {
+            $status = 0;            
+        }
+
+        // UPDATE `piSS_Zones` SET `Status` = '1' WHERE `piSS_Zones`.`ID` = 1;  
+        $sql = "UPDATE {$this->_db4} SET 
+        Status = '" . $status . "'
+        WHERE Zone = " . $zone;
+
+        $this->db->query($sql);
+
+        if ($this->db->affected_rows() > 0)
+        {
+            $saved = TRUE;
+        }
+
+        if ($saved)
+        {
+            return TRUE;
         }
 
         return FALSE;

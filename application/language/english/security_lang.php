@@ -77,7 +77,7 @@ $lang['security msg add_user_success']           = "%s was successfully added!";
 $lang['security msg delete_confirm']             = "Are you sure you want to delete <strong>%s</strong>? This can not be undone.";
 $lang['security msg delete_user']                = "You have succesfully deleted <strong>%s</strong>!";
 $lang['security msg edit_profile_success']       = "Your profile was successfully modified!";
-$lang['security msg edit_user_success']          = "%s was successfully modified!";
+$lang['security msg edit_user_success']          = "%s was successfully modified!"; 
 $lang['security msg register_success']           = "Thanks for registering, %s! Check your email for a confirmation message. Once
                                                  your account has been verified, you will be able to log in with the credentials
                                                  you provided.";
@@ -107,3 +107,5 @@ $lang['security error user_not_exist']           = "That user does not exist!";
 $lang['security error username_exists']          = "The username <strong>%s</strong> already exists!";
 $lang['security error validate_failed']          = "There was a problem validating your account. Please try again.";
 $lang['security error too_many_login_attempts']  = "You've made too many attempts to log in too quickly. Please wait %s seconds and try again.";
+
+

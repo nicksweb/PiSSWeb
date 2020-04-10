@@ -8,6 +8,7 @@ class Api extends API_Controller {
     function __construct()
     {
         parent::__construct();
+
     }
 
 
@@ -22,10 +23,23 @@ class Api extends API_Controller {
         exit;
     }
 
+    public function checkaccess() {
+		
+		$accesslive = $this->input->get("accesstoken");
+		$sitetoken = $this->settings->apitoken;
+	
+	if ($sitetoken == $accesslive ) {
+	 return True; 		  			
+		} else { 
+		 die("Access is strictly prohibited!");
+		}
+		
+	}
+
 
     /**
      * Users API - DO NOT LEAVE THIS ACTIVE IN A PRODUCTION ENVIRONMENT !!! - for demo purposes only
-     */
+     *
     function users()
     {
         // load the users model and admin language file
@@ -55,6 +69,48 @@ class Api extends API_Controller {
         // display results using the JSON formatter helper
         display_json($results);
         exit;
+    } */
+
+    function setZone()
+    {        
+        if($this->checkaccess()) { 
+
+        // save the changes
+        $mode = $this->input->get('mode');
+
+        if ($mode == "true" or $mode == "false") {
+
+        $zone = $this->input->get('zone');
+
+        // load the security model
+        $this->load->model('security_model');
+
+        // set zone data
+        $zone = $this->security_model->setZone($zone,$mode);
+
+        // return to list and display message
+        #redirect($this->_redirect_url);
+        echo $mode, "   ", $zone;
+
+        exit;
+        } 
+
+        if ($mode == "remote") {
+
+            $zone = $this->input->get('zone'); 
+
+            $sitetoken = $this->settings->apitoken;
+            $siteurl = $this->settings->siteurl;
+            
+            $file = $siteurl . $sitetoken . "/" . $zone;
+
+            $command = file_get_contents($file);
+
+            echo $file; 
+
+        } 
+
+    }
     }
 
 }
