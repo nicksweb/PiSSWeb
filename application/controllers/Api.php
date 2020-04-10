@@ -102,6 +102,7 @@ class Api extends API_Controller {
             $sitetoken = $this->settings->apitoken;
             $siteurl = $this->settings->siteurl;
             
+            https://172.16.0.22/api/setzone?accesstoken=1cfd6847b4be4a8cbb93a8488e8ffa21aaa&mode=true&zone=1
             $file = $siteurl . $sitetoken . "/" . $zone;
 
             $command = file_get_contents($file);

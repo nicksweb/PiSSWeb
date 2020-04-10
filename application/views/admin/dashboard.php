@@ -23,6 +23,10 @@
     </div>
   <div class="col-sm-4">
 
+    <?php foreach ($ZoneInAlarms as $ZoneInAlarm): ?>
+      <?php if ($ZoneInAlarm['Value']!=99){ ?>
+      <button class="btn btn-warning btn-lg p-5" onclick="AlarmClear()">AlarmOff</button><br /><br />
+    <?php } endforeach; ?>
     <button class="btn btn-primary btn-lg p-5" onclick="RemoteInput7()">A Key</button><br /><br />
     <button class="btn btn-primary btn-lg p-5" onclick="RemoteInput6()">B Key</button><br /><br />
     <button class="btn btn-primary btn-lg p-5" onclick="RemoteInput5()">C Key</button><br / ><br />
@@ -72,6 +76,14 @@
   });
 
     <?php endforeach; ?>
+
+    function AlarmClear() {
+        $.ajax({
+        type:"GET",//or POST
+        url:'./api/setzone',
+        data: 'accesstoken=<?php echo $apikey; ?>&mode=remote&zone=AlarmClear'
+     })
+    }
 
     function RemoteInput4() {
         $.ajax({

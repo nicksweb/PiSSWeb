@@ -161,7 +161,30 @@ class Security_model extends CI_Model {
         return $results;
     }
 
-    
+    function get_zoneInAlarm()
+    {
+
+        $sql = "
+        SELECT *   
+            From piSS_Settings
+            Where SettingKey like 'ZoneinAlarm'
+        ";
+
+        
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0)
+        {
+            $results['results'] = $query->result_array();
+        }
+        
+        else
+        {
+            $results['results'] = NULL;
+        }
+
+        return $results;
+    }
 
 
     /**

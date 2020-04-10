@@ -33,15 +33,17 @@ class Dashboard extends Admin_Controller {
         $data = $this->includes;
 
         $piss = $this->security_model->get_zone_status();
+        $pissClear = $this->security_model->get_zoneInAlarm();
 
         // load views
-        $data['content'] = $this->load->view('admin/dashboard', NULL, TRUE);
-        $data['zones'] = $piss['results'];
+        #$data['content'] = $this->load->view('admin/dashboard', NULL, TRUE);
+        #$data['zones'] = $piss['results'];
 
         // set content data
         $content_data = array(
             'content'   => $this->load->view('admin/dashboard', NULL, TRUE),
             'zones'      => $piss['results'],
+            'ZoneInAlarms' => $pissClear['results'],
             'apikey' => $this->settings->apitoken
        );
 
