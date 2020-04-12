@@ -270,6 +270,8 @@ class Security extends Admin_Controller {
         // get settings
         $settings = $this->security_model->get_settings();
         $categories = $this->security_model->get_settings_categories();
+        $zones = $this->security_model->get_settings_zones();
+
 
         // form validations
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
@@ -300,6 +302,7 @@ class Security extends Admin_Controller {
 
             //$this->input->post();
             // save the settings
+            //$zones = $this->security_model->save_zones($this->input->post();
             $saved = $this->security_model->save_settings($this->input->post(), $user['id']);
             $saved = TRUE;
 
@@ -331,12 +334,14 @@ class Security extends Admin_Controller {
 			->add_js_theme('settings_i18n.js', TRUE)
 			->set_title(lang('admin security title'));
 
+        $this->set_title("Settings");
         $data = $this->includes;
 
         // set content data
         $content_data = array(
             'settings'   => $settings,
             'categories' => $categories,
+            'zones' => $zones,
             'cancel_url' => "/admin/security/settings",
         );
 
@@ -408,6 +413,8 @@ class Security extends Admin_Controller {
      */
     function edit($id=NULL)
     {
+        $this->_redirect_url = "/admin";
+        
         // make sure we have a numeric id
         if (is_null($id) OR ! is_numeric($id))
         {
@@ -415,7 +422,7 @@ class Security extends Admin_Controller {
         }
 
         // get the data
-        $user = $this->security_model->get_user($id);
+        $user = $this->security_model->get_zone($id);
 
         // if empty results, return to list
         if ( ! $user)
@@ -424,29 +431,20 @@ class Security extends Admin_Controller {
         }
 
         // validators
-        $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('username', lang('security input username'), 'required|trim|min_length[5]|max_length[30]|callback__check_username[' . $user['username'] . ']');
-        $this->form_validation->set_rules('first_name', lang('security input first_name'), 'required|trim|min_length[2]|max_length[32]');
-        $this->form_validation->set_rules('last_name', lang('security input last_name'), 'required|trim|min_length[2]|max_length[32]');
-        $this->form_validation->set_rules('email', lang('security input email'), 'required|trim|max_length[128]|valid_email|callback__check_email[' . $user['email'] . ']');
-        $this->form_validation->set_rules('language', lang('security input language'), 'required|trim');
-        $this->form_validation->set_rules('status', lang('security input status'), 'required|numeric');
-        $this->form_validation->set_rules('is_admin', lang('security input is_admin'), 'required|numeric');
-        $this->form_validation->set_rules('password', lang('security input password'), 'min_length[5]|matches[password_repeat]');
-        $this->form_validation->set_rules('password_repeat', lang('security input password_repeat'), 'matches[password]');
+        $this->form_validation->set_rules('name', lang('security input username'), 'required');
 
         if ($this->form_validation->run() == TRUE)
         {
             // save the changes
-            $saved = $this->security_model->edit_user($this->input->post());
+            $saved = $this->security_model->edit_zone($this->input->post());
 
             if ($saved)
             {
-                $this->session->set_flashdata('message', sprintf(lang('security msg edit_user_success'), $this->input->post('first_name') . " " . $this->input->post('last_name')));
+                $this->session->set_flashdata('message', sprintf(lang('security msg edit_zone_success'), $this->input->post('name') . " " . $this->input->post('zone')));
             }
             else
             {
-                $this->session->set_flashdata('error', sprintf(lang('security error edit_user_failed'), $this->input->post('first_name') . " " . $this->input->post('last_name')));
+                $this->session->set_flashdata('error', sprintf(lang('security msg edit_zone_failed'), $this->input->post('name') . " " . $this->input->post('zone')));
             }
 
             // return to list and display message

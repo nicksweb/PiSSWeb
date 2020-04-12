@@ -6,37 +6,69 @@
 <h1>Controls</h1>
     
 <div class="row">
-  <div class="col-sm-4">
+  
+<div class="col-sm-3 text-center">
 
+<div class="btn-group" role="group" aria-label="Basic example">
+  <?php foreach ($ZoneInAlarms as $ZoneInAlarm): ?>
+    <?php if ($ZoneInAlarm['Value']!=99){ ?>
+    <button class="btn btn-warning p-5" onclick="AlarmClear()">Alarm Off</button>
+  <?php } endforeach; ?>
+  <button class="btn btn-primary p-5" onclick="RemoteInput7()">A Key</button>
+  <button class="btn btn-primary p-5" onclick="RemoteInput6()">B Key</button>
+  <button class="btn btn-primary p-5" onclick="RemoteInput5()">C Key</button>
+  <button class="btn btn-danger p-5" onclick="RemoteInput4()">Panic</button>
+</div>
+  
+  <!--  <form id="myForm" name="myForm" action="audio_alarm.php" method="post"> 
+    <input type="checkbox" name="toggle" id="toggle2" data-toggle="toggle" data-off="Disabled" data-on="Enabled" data-height="4.5em" checked>
+  </form> -->
+  
+  </div>
+
+  <div class="col-sm-3 text-left">
+    
     <?php foreach ($zones as $zone) : ?>
 
-      <div class="checkbox">
+      <div class="checkbox ">
         <label>
-          <input type="checkbox" name="toggle<?php echo $zone['Zone']; ?>" id="toggle<?php echo $zone['Zone']; ?>" data-toggle="toggle" data-off="Off" data-on="On" data-height="4.5em" data-onstyle="danger" data-offstyle="success" <?php echo (($zone['Status'] == '1') ? 'checked' : ''); ?>>
+          <input type="checkbox" name="toggle<?php echo $zone['Zone']; ?>" id="toggle<?php echo $zone['Zone']; ?>" data-toggle="toggle" data-off="Off" data-on="On" data-size="large" data-onstyle="danger" data-offstyle="success" <?php echo (($zone['Status'] == '1') ? 'checked' : ''); ?>>
           <?php echo $zone['Name']; ?>
         </label>
+        <a href="admin/security/edit/<?php echo $zone['Zone']; ?>"><span class="glyphicon glyphicon-edit"></span></a>
       </div>
 
 
     <?php endforeach; ?>
 
     </div>
-  <div class="col-sm-4">
+  
+    <div class="col-sm-2">
+    <!-- On rows -->
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Zone</th>
+      <th scope="col">Status</th>
+      <th scope="col">Time</th>
+      <th scope="col">ID</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($logs as $log) : ?>
+      <tr class="danger">
+        <th scope="row"><?php echo $log['Port']; ?></th>
+        <td class="table-danger "><?php echo $log['Status']; ?></td>
+        <td><?php echo $log['LoggedTime']; ?></td>
+        <td><?php echo $log['ID']; ?></td>
+      </tr>
 
-    <?php foreach ($ZoneInAlarms as $ZoneInAlarm): ?>
-      <?php if ($ZoneInAlarm['Value']!=99){ ?>
-      <button class="btn btn-warning btn-lg p-5" onclick="AlarmClear()">AlarmOff</button><br /><br />
-    <?php } endforeach; ?>
-    <button class="btn btn-primary btn-lg p-5" onclick="RemoteInput7()">A Key</button><br /><br />
-    <button class="btn btn-primary btn-lg p-5" onclick="RemoteInput6()">B Key</button><br /><br />
-    <button class="btn btn-primary btn-lg p-5" onclick="RemoteInput5()">C Key</button><br / ><br />
-    <button class="btn btn-danger btn-lg p-5" onclick="RemoteInput4()">Panic</button><br /><br />
+  <?php endforeach; ?>
 
-    
-    <!--  <form id="myForm" name="myForm" action="audio_alarm.php" method="post"> 
-      <input type="checkbox" name="toggle" id="toggle2" data-toggle="toggle" data-off="Disabled" data-on="Enabled" data-height="4.5em" checked>
-    </form> -->
-    
+  </tbody>
+</table>
+
+
     </div>
 </div> 
 

@@ -34,6 +34,7 @@ class Dashboard extends Admin_Controller {
 
         $piss = $this->security_model->get_zone_status();
         $pissClear = $this->security_model->get_zoneInAlarm();
+        $pissLog = $this->security_model->get_all_SensorLog(5);
 
         // load views
         #$data['content'] = $this->load->view('admin/dashboard', NULL, TRUE);
@@ -43,6 +44,7 @@ class Dashboard extends Admin_Controller {
         $content_data = array(
             'content'   => $this->load->view('admin/dashboard', NULL, TRUE),
             'zones'      => $piss['results'],
+            'logs'      => $pissLog['results'],
             'ZoneInAlarms' => $pissClear['results'],
             'apikey' => $this->settings->apitoken
        );

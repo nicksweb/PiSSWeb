@@ -247,16 +247,14 @@ class Security_model extends CI_Model {
      * @return array|boolean
      */
     
-     function get_user($id=NULL)
+     function get_zone($id=NULL)
     {
-        if ($id)
+        if ($id >= 0)
         {
             $sql = "
                 SELECT *
-                FROM {$this->_db}
-                WHERE id = " . $this->db->escape($id) . "
-                    AND deleted = '0'
-            ";
+                FROM {$this->_db4}
+                WHERE Zone = " . $this->db->escape($id) . ";";
 
             $query = $this->db->query($sql);
 
@@ -391,39 +389,14 @@ class Security_model extends CI_Model {
      * @param  array $data
      * @return boolean
      */
-    function edit_user($data=array())
+    function edit_zone($data=array())
     {
         if ($data)
         {
             $sql = "
-                UPDATE {$this->_db}
+                UPDATE {$this->_db4}
                 SET
-                    username = " . $this->db->escape($data['username']) . ",
-            ";
-
-            if ($data['password'] != '')
-            {
-                // secure password
-                $salt     = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), TRUE));
-                $password = hash('sha512', $data['password'] . $salt);
-
-                $sql .= "
-                    password = " . $this->db->escape($password) . ",
-                    salt = " . $this->db->escape($salt) . ",
-                ";
-            }
-
-            $sql .= "
-                    first_name = " . $this->db->escape($data['first_name']) . ",
-                    last_name = " . $this->db->escape($data['last_name']) . ",
-                    email = " . $this->db->escape($data['email']) . ",
-                    language = " . $this->db->escape($data['language']) . ",
-                    is_admin = " . $this->db->escape($data['is_admin']) . ",
-                    status = " . $this->db->escape($data['status']) . ",
-                    updated = '" . date('Y-m-d H:i:s') . "'
-                WHERE id = " . $this->db->escape($data['id']) . "
-                    AND deleted = '0'
-            ";
+                    Name = " . $this->db->escape($data['name']) . " Where Zone = " . $data['id'] . ";";
 
             $this->db->query($sql);
 
@@ -724,6 +697,63 @@ class Security_model extends CI_Model {
         //}
 
         return $results2;
+    }
+
+    function get_settings_zones() 
+    {
+        $sql = "Select DISTINCT category from {$this->_db5}";
+        $query = $this->db->query($sql);
+        $results = $query->result_array();
+
+        $results2=array();
+
+        foreach ($results as $value) {
+            $results2= $value;
+        }
+
+        //if ($query->num_rows() > 0) {
+        //    $results = $query->result_array();            
+        //}
+
+        //else
+        //{
+         //   $results = NULL;
+        //}
+
+        return $results2;
+    }
+
+    function save_zones($data=array(), $user_id=NULL)
+    {
+        if ($data && $user_id)
+        {
+            $saved = FALSE;
+
+            foreach ($data as $key => $value)
+            {
+                $sql = "
+                    UPDATE {$this->_db5}
+                    SET Value = " . ((is_array($value)) ? $this->db->escape(serialize($value)) : $this->db->escape($value)) . ",
+                        last_update = '" . date('Y-m-d H:i:s') . "',
+                        updated_by = " . $this->db->escape($user_id) . "
+                    WHERE SettingKey = " . $this->db->escape($key) . "
+                ";
+
+                $this->db->query($sql);
+
+                if ($this->db->affected_rows() > 0)
+                {
+                    $saved = TRUE;
+                }
+            }
+
+            if ($saved)
+            {
+                return TRUE;
+            }
+        }
+
+        return FALSE;
     }
 
 

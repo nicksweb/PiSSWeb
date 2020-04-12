@@ -53,7 +53,7 @@ $lang['users msg add_user_success']           = "%s was successfully added!";
 $lang['users msg delete_confirm']             = "Are you sure you want to delete <strong>%s</strong>? This can not be undone.";
 $lang['users msg delete_user']                = "You have succesfully deleted <strong>%s</strong>!";
 $lang['users msg edit_profile_success']       = "Your profile was successfully modified!";
-$lang['users msg edit_user_success']          = "%s was successfully modified!";
+$lang['users msg edit_zone_success']          = "%s was successfully modified!";
 $lang['users msg register_success']           = "Thanks for registering, %s! Check your email for a confirmation message. Once
                                                  your account has been verified, you will be able to log in with the credentials
                                                  you provided.";
@@ -72,7 +72,7 @@ $lang['users msg email_password_reset_title'] = "Password Reset for %s";
 $lang['users error add_user_failed']          = "%s could not be added!";
 $lang['users error delete_user']              = "<strong>%s</strong> could not be deleted!";
 $lang['users error edit_profile_failed']      = "Your profile could not be modified!";
-$lang['users error edit_user_failed']         = "%s could not be modified!";
+$lang['users error edit_zone_failed']         = "%s could not be modified!";
 $lang['users error email_exists']             = "The email <strong>%s</strong> already exists!";
 $lang['users error email_not_exists']         = "That email does not exists!";
 $lang['users error invalid_login']            = "Invalid username or password";

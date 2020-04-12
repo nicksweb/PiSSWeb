@@ -61,7 +61,7 @@ $lang['security input last_name']                = "Last Name";
 $lang['security input password']                 = "Password";
 $lang['security input password_repeat']          = "Repeat Password";
 $lang['security input status']                   = "Status";
-$lang['security input username']                 = "Username";
+$lang['security input zone']                 = "Zone";
 $lang['security input username_email']           = "Username or Email";
 
 $lang['security input id']           = "ID";
@@ -77,7 +77,7 @@ $lang['security msg add_user_success']           = "%s was successfully added!";
 $lang['security msg delete_confirm']             = "Are you sure you want to delete <strong>%s</strong>? This can not be undone.";
 $lang['security msg delete_user']                = "You have succesfully deleted <strong>%s</strong>!";
 $lang['security msg edit_profile_success']       = "Your profile was successfully modified!";
-$lang['security msg edit_user_success']          = "%s was successfully modified!"; 
+$lang['security msg edit_zone_success']          = "%s was successfully modified!"; 
 $lang['security msg register_success']           = "Thanks for registering, %s! Check your email for a confirmation message. Once
                                                  your account has been verified, you will be able to log in with the credentials
                                                  you provided.";
