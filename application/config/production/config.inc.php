@@ -23,4 +23,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://172.16.0.22';
+$config['base_url'] = 'https://domain.com/'; // Production domain goes here.. 

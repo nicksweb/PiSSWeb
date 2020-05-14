@@ -13,6 +13,7 @@
     <title><?php echo $page_title; ?> - <?php echo $this->settings->site_name; ?></title>
     <meta name="keywords" content="<?php echo $this->settings->meta_keywords; ?>">
     <meta name="description" content="<?php echo $this->settings->meta_description; ?>">
+    <link rel="apple-touch-icon" href="/data/apple-touch-icon.png">
 
     <?php // CSS files ?>
     <?php if (isset($css_files) && is_array($css_files)) : ?>

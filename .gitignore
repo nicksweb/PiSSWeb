@@ -9,3 +9,8 @@
 .DS_Store
 Thumbs.db
 ._*
+
+*/applications/config/development/config.php
+*/applications/config/development/database.php
+*/applications/config/production/config.php
+*/applications/config/production/database.php

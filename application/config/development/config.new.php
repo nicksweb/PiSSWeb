@@ -29,5 +29,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Switched to .local for development
  * http://fossilgeek.jasonbaier.com/posts/google-chrome-63-forcing-dev-domains-to-https
  */
-$config['base_url'] = 'https://piss.suburbanau.com/';
+$config['base_url'] = 'https://172.16.0.22/';  // Internal or external address.
 // $config['base_url'] = 'https://pissweb.autechnet.local';
