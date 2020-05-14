@@ -45,8 +45,7 @@ class Security_model extends CI_Model {
 
         $sql = "
         SELECT SQL_CALC_FOUND_ROWS db3.ID as ID, db3.LoggedTime as LoggedTime, db3.Status as Status, db2.Zone as Zone, db2.Name as Port  
-            From piSS_SensorLog db3 left join piSS_Zones db2 on db2.ID=db3.Port
-            Where db2.ID > 0
+            From piSS_SensorLog db3 left join piSS_Zones db2 on db2.Zone=db3.Port
         ";
 
         if ( ! empty($filters))
