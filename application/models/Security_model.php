@@ -21,6 +21,7 @@ class Security_model extends CI_Model {
         $this->_db3 = 'piSS_SensorLog';
         $this->_db4 = 'piSS_Zones';
         $this->_db5 = 'piSS_Settings';
+        $this->_db6 = 'piSS_Log_Arming';
 
     }
 
@@ -814,6 +815,12 @@ class Security_model extends CI_Model {
         Status = '" . $status . "'
         WHERE Zone = " . $zone;
 
+        $this->db->query($sql);
+
+	// Insert Data into Arming_Log History         
+        // UPDATE `piSS_Zones` SET `Status` = '1' WHERE `piSS_Zones`.`ID` = 1;  
+        $sql = "INSERT INTO {$this->_db6} (Port, Status) VALUES (".$zone.", ".$status.")";
+    
         $this->db->query($sql);
 
         if ($this->db->affected_rows() > 0)
