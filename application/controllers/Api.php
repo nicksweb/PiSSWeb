@@ -102,7 +102,7 @@ class Api extends API_Controller {
             $sitetoken = $this->settings->apitoken;
             $siteurl = $this->settings->siteurl;
             
-            https://172.16.0.22/api/setzone?accesstoken=1cfd6847b4be4a8cbb93a8488e8ffa21aaa&mode=true&zone=1
+            //https://172.16.0.22/api/setzone?accesstoken=1cfd6847b4be4a8cbb93a8488e8ffa21aaa&mode=true&zone=1
             $file = $siteurl . $sitetoken . "/" . $zone;
 
             $command = file_get_contents($file);
@@ -112,6 +112,27 @@ class Api extends API_Controller {
         } 
 
     }
+    }
+    
+    function getZoneStatus()
+    {
+        if($this->checkaccess()) { 
+
+        // save the changes
+        $zone = $this->input->get('zone');
+        #$mode = $this->input->get('mode');
+        #$relay = $this->input->get('relay'); 
+        
+        // load the security model
+        $this->load->model('security_model');
+        
+        // Get the data
+        $piss = $this->security_model->get_zone_status();
+        
+        //display_json();
+        print_r($piss['results'][$zone]['Status']);    
+        exit;
+        }        
     }
 
 }

@@ -24,8 +24,8 @@
     <input type="checkbox" name="toggle" id="toggle2" data-toggle="toggle" data-off="Disabled" data-on="Enabled" data-height="4.5em" checked>
   </form> -->
   
-  </div>
-
+</div>
+  
   <div class="col-sm-3 text-left">
     
     <?php foreach ($zones as $zone) : ?>
@@ -108,6 +108,32 @@
   });
 
     <?php endforeach; ?>
+    
+    $('#toggle-shedlock').change(function(){
+    var mode= $(this).prop('checked');
+
+    if (mode==true) {
+
+      $.ajax({
+      type: "GET",
+      url:'http://172.16.1.23',
+      data: 'update?relay=1&state=1'
+    });
+
+
+    }
+
+    else {
+
+      $.ajax({
+      type: 'GET',
+      url:'http://172.16.1.23/update',
+      data: '?relay=1&state=0'
+    });
+
+
+    }
+  });
 
     function AlarmClear() {
         $.ajax({
